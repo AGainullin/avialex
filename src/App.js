@@ -1,18 +1,38 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+//import {useDispatch, useSelector} from 'react-redux';
 import './App.css';
-import PropTypes from 'prop-types';
+import {forFastFlightAction} from './redux/flight-page-reducer';
+import store from './redux/store';
 
-function App(props) {
+import getTicketsArray from './requests/requests';
+
+
+function App() {
+
+
+  //const state = store.getState().flightPage;
+  //console.log(state);
+
+  console.log(getTicketsArray());
+
+
+
+  const getFastTicketsPage = () => {
+    const action = forFastFlightAction();
+    store.dispatch(action);
+
+    //const state = store.getState().flightPage;
+    //console.log(state);
+
+  };
+
+
   return (
     <div className="wrapper">
       <header>Logo</header>
-      {props.state.ticket}
+      <button onClick={getFastTicketsPage}>Fast</button>
     </div>
   );
 }
-
-App.propTypes = {
-  ticket: PropTypes.string
-  }
 
 export default App;
