@@ -1,40 +1,39 @@
-import getTicketsArray from './../requests/requests';
-
-
-const FAST_FLIGHT = 'FAST_FLIGHT';
-const LOW_COST_FLIGHT = 'LOW_COST_FLIGHT';
-
-
+import {
+  ALL_TICKETS,
+  FAST_FLIGHT,
+  LOW_COST_FLIGHT,
+} from '../global-variables/variables-for-flight-page';
 
 const initialState = {
-      tickets: [1, 2 , 3],
-      count : 1  
-}
-
+  ticketsAll: [],
+  resultForFast: [],
+  resultForLowCost: [],
+  onLoading: true,
+};
 
 const flightReducer = (state = initialState, action) => {
-
   switch (action.type) {
+    case ALL_TICKETS:
+      return {
+        ...state,
+        ticketsAll: action.payload,
+        resultForFast: [],
+        resultForLowCost: [],
+        onLoading: false,
+      };
     case FAST_FLIGHT:
       return {
         ...state,
-        count : 2,
+        resultForFast: action.payload,
       };
     case LOW_COST_FLIGHT:
       return {
         ...state,
+        resultForLowCost: action.payload,
       };
     default:
       return state;
   }
 };
-
-export const forFastFlightAction = () => ({
-  type: FAST_FLIGHT
-});
-export const forLowCostFlightAction = (transfer) => ({
-  type: LOW_COST_FLIGHT,
-  transfer,
-});
 
 export default flightReducer;

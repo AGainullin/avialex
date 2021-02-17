@@ -13,6 +13,9 @@
     ],
     "rules": {
       "semi": [2, "always"],
+      "no-console": "off",
+      "no-debugger": "off",
+      "no-await-in-loop": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "prettier/prettier": [
         "error", {

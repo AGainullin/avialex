@@ -1,66 +1,42 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  BASE_URL,
+  URL_ID_PARAMETR,
+  URL_TICKETS_PARAMETR,
+} from '../global-variables/variables-for-requests';
 
+const getSearchId = async () => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/${URL_ID_PARAMETR}`);
+    return data.searchId;
+  } catch (e) {
+    console.error(e);
+    return '';
+  }
+};
 
-function getTicketsArray() {
-  const BASE_API_URL = 'https://front-test.beta.aviasales.ru/';
+const getTicketsArray = async (searchId) => {
+  const { data } = await axios.get(`${BASE_URL}/${URL_TICKETS_PARAMETR}`, {
+    params: { searchId },
+  });
+  return { tickets: data.tickets, stop: data.stop };
+};
 
-  const [stateSearchId, setStateSearchId] = useState();
-  const [stopSearch, setStopSearch] = useState(false);
+const getTicketsForStore = async () => {
+  const searchId = await getSearchId();
+  let ticketsForStore = [];
+  let stopState = false;
 
-  const [states, setStates] = useState([]); // Temp - Delete
-
-
-  useEffect(async () => {
+  while (!stopState) {
     try {
-      const response = await axios.get(`${BASE_API_URL}search`);
-      setStateSearchId(response.data.searchId);
-    } catch (error) {
-      console.error(error);
+      const { tickets, stop } = await getTicketsArray(searchId);
+      stopState = stop;
+      ticketsForStore = [...ticketsForStore, ...tickets];
+    } catch (e) {
+      console.warn(e);
     }
-  }, [])
+  }
+  return ticketsForStore;
+};
 
-  useEffect(() => {
-    //console.log('One');
-    async function addTickets() {
-
-      if (stateSearchId && stopSearch == false) {
-
-        try {
-          const url = `${BASE_API_URL}tickets?searchId=${stateSearchId}`;
-          const response = await axios.get(url);
-          if (response.status !== 200) {
-            addTickets();
-          }
-          else {
-
-            setStates([...states, ...response.data.tickets]);
-
-
-            if (response.data.stop == true) {
-              setStopSearch(true);
-            }
-            else {
-              addTickets();
-            }
-          }
-
-        } catch (error) {
-          console.error(error);
-        }
-
-      }
-    }
-    addTickets();
-
-
-  }, [stateSearchId, stopSearch, states])
-
-
-  return states;
-
-}
-
-
-
-export default getTicketsArray;
+export default getTicketsForStore;
