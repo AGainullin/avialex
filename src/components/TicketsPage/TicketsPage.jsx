@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   allTicketsAction,
@@ -33,16 +33,17 @@ const TicketsPage = () => {
     INITIAL_NUMBER_TICKETS
   );
   const dispatch = useDispatch();
+  const updateTicketsButton = useRef();
 
   useEffect(() => {
     if (state.isLoading === true) {
       dispatch(allTicketsAction());
       setTimeout(() => {
-        const updateElement = document.getElementById('update__tickets');
-        updateElement.classList.add('show');
+        updateTicketsButton.current.classList.remove('hide');
+        updateTicketsButton.current.classList.add('show');
       }, UPDATE_TIME);
     }
-  }, [state.isLoading]);
+  }, [state.isLoading, dispatch]);
 
   useEffect(() => {
     if (state.ticketsAll !== []) {
@@ -55,7 +56,13 @@ const TicketsPage = () => {
         )
       );
     }
-  }, [flightFilter, sortByTransfer, numberTicketsOnPage, state.ticketsAll]);
+  }, [
+    flightFilter,
+    sortByTransfer,
+    numberTicketsOnPage,
+    state.ticketsAll,
+    dispatch,
+  ]);
 
   const onClickFast = () => {
     setFlightFilter(FAST_FLIGHT);
@@ -70,8 +77,8 @@ const TicketsPage = () => {
   };
   const updateTickets = () => {
     dispatch(updateTicketsAction());
-    const updateElement = document.getElementById('update__tickets');
-    updateElement.classList.remove('show');
+    updateTicketsButton.current.classList.remove('show');
+    updateTicketsButton.current.classList.add('hide');
   };
 
   return (
@@ -104,7 +111,10 @@ const TicketsPage = () => {
           <LoadingData />
         )}
       </div>
-      <ButtonUpdateTickets onClickFunc={updateTickets} />
+      <ButtonUpdateTickets
+        onClickFunc={updateTickets}
+        ref={updateTicketsButton}
+      />
     </>
   );
 };

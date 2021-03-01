@@ -1,18 +1,21 @@
 #update__tickets {
-    display: none;
     position: fixed;
-    bottom:20px;
+    bottom:50px;
+    margin-left: -50px;
+    background:$attention-color;
+    cursor: pointer;
+    padding: 30px;
+    color:#ffffff;
+    font-size: 16px;
+    outline: none;
+    border:$default-button-border;
+    border-radius: 5px;
 }
-#update__tickets.show {
-    display: block;
-    opacity:0;
-    animation: show 2s 1;
-    animation-fill-mode: forwards;    
+#update__tickets:hover {
+    background:$attention-color-hover;
 }
-@keyframes show{
-    0%{ opacity:0; }
-    100% { opacity:1; }
-    }
+
+
 .tickets__wrapper {
     .loading__wrapper {
         text-align: center;
@@ -22,12 +25,12 @@
     .ticket {
         background:$background-element;
         border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.1);
-        margin-bottom: 20px;
+        box-shadow: $shadow-element;
+        margin: $default-margin-element;
         height: 184px;
         padding: 20px;
         opacity:0;
-        animation: show 2s 1;
+        animation: $default-animation-showElement;
         animation-fill-mode: forwards;
 
         .price__wrapper {
