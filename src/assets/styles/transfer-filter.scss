@@ -1,0 +1,45 @@
+.transfer__filter {
+    background:$background-element;
+    border-radius: 5px;
+    box-shadow: $shadow-element;
+    padding: 20px;
+    h3 {
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin: $default-margin-element;
+
+    }
+    .checkbox__transfer{
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        display: block;
+        margin: $default-margin-element;
+        text-transform: capitalize;
+        font-weight: normal;
+        font-size: 13px;
+
+        input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            border: 0;
+            padding: 0;
+            clip: rect(0 0 0 0);
+            overflow: hidden;
+            margin-left: -30px;
+        }
+        span {
+            position: absolute;
+            width:20px;
+            height: 20px;
+            margin-left: -30px;
+            background: url(../images/off-check.svg) top left no-repeat;
+        }
+        input.checked + span {
+            background: url(../images/on-check.svg) top left no-repeat;
+        }
+    }
+}

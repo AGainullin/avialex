@@ -1,0 +1,30 @@
+.flight__filter {
+    display: flex;
+    button {
+        background:$button-color;
+        border:$default-button-border;
+        box-shadow:$shadow-element;
+        width: 100%;
+        cursor: pointer;
+        outline: none;
+        color: $main-text-color;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+
+    }
+    button:hover {
+        background:$hover-button-color;
+    }
+    .left__button {
+        border-radius: 5px 0 0 5px;
+    }
+    .right__button {
+        border-radius: 0 5px 5px 0;
+    }
+    .active, button.active:hover {
+        background:$active-button-color;
+        color:$background-element;
+        cursor: default;
+    }
+}

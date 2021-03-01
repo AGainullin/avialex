@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {
   BASE_URL,
-  URL_ID_PARAMETR,
-  URL_TICKETS_PARAMETR,
+  URL_ID_PARAMETER,
+  URL_TICKETS_PARAMETER,
 } from '../global-variables/variables-for-requests';
 
 const getSearchId = async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/${URL_ID_PARAMETR}`);
+    const { data } = await axios.get(`${BASE_URL}/${URL_ID_PARAMETER}`);
     return data.searchId;
   } catch (e) {
     console.error(e);
@@ -16,7 +16,7 @@ const getSearchId = async () => {
 };
 
 const getTicketsArray = async (searchId) => {
-  const { data } = await axios.get(`${BASE_URL}/${URL_TICKETS_PARAMETR}`, {
+  const { data } = await axios.get(`${BASE_URL}/${URL_TICKETS_PARAMETER}`, {
     params: { searchId },
   });
   return { tickets: data.tickets, stop: data.stop };

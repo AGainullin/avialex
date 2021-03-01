@@ -1,14 +1,9 @@
-import {
-  ALL_TICKETS,
-  FAST_FLIGHT,
-  LOW_COST_FLIGHT,
-} from '../global-variables/variables-for-flight-page';
+import { ALL_TICKETS, SORTED_TICKETS, UPDATE_TICKETS } from './constants';
 
 const initialState = {
   ticketsAll: [],
-  resultForFast: [],
-  resultForLowCost: [],
-  onLoading: true,
+  uiState: [],
+  isLoading: true,
 };
 
 const flightReducer = (state = initialState, action) => {
@@ -17,19 +12,18 @@ const flightReducer = (state = initialState, action) => {
       return {
         ...state,
         ticketsAll: action.payload,
-        resultForFast: [],
-        resultForLowCost: [],
-        onLoading: false,
+        isLoading: false,
       };
-    case FAST_FLIGHT:
+    case UPDATE_TICKETS:
+      return {
+        ticketsAll: [],
+        uiState: [],
+        isLoading: true,
+      };
+    case SORTED_TICKETS:
       return {
         ...state,
-        resultForFast: action.payload,
-      };
-    case LOW_COST_FLIGHT:
-      return {
-        ...state,
-        resultForLowCost: action.payload,
+        uiState: action.payload,
       };
     default:
       return state;
