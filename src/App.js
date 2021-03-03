@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import TicketsPage from './components/TicketsPage/TicketsPage';
+import './App.scss';
+import logo from './assets/images/logo.svg';
 
 function App() {
+  const year = new Date();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <div className="wrapper">
+      <header>
+        <a href="/">
+          <img src={logo} className="logo" alt="avia sales" />
         </a>
       </header>
+      <TicketsPage />
+      <footer>&copy; Avialex {year.getFullYear()}</footer>
     </div>
   );
 }

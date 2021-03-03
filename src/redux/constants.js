@@ -1,0 +1,3 @@
+export const ALL_TICKETS = 'ALL_TICKETS';
+export const SORTED_TICKETS = 'SORTED_TICKETS';
+export const UPDATE_TICKETS = 'UPDATE_TICKETS';

@@ -12,10 +12,17 @@
       "prettier"
     ],
     "rules": {
+      "semi": [2, "always"],
+      "no-console": "off",
+      "no-debugger": "off",
+      "no-await-in-loop": "off",
+      "no-plusplus": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "prettier/prettier": [
         "error", {
-          "singleQuote": true
+          "singleQuote": true,
+          "semi": true,
+          "endOfLine":"auto"
         }
       ]
     }
